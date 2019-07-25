@@ -1,0 +1,32 @@
+# Uncomment this line to define a global platform for your project
+platform :osx, '10.12'
+
+workspace 'demo1_pod_import.xcworkspace'
+project 'demo1_pod_import.xcodeproj'
+
+inhibit_all_warnings!
+
+# Uncomment this line if you're using Swift or would like to use dynamic frameworks
+use_frameworks!
+
+# 公用的一些pod库，一般新增的库都加在这下面
+def common_pods
+    # Pods for Jalebee
+    
+    pod 'YYModel'
+end
+
+target 'demo1_pod_import' do
+    
+    common_pods
+end
+
+
+# 修复inhibit_all_warnings在子工程无效的bug
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
+        end
+    end
+end

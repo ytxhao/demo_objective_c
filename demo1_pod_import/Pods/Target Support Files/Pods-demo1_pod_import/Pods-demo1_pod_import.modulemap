@@ -1,0 +1,6 @@
+framework module Pods_demo1_pod_import {
+  umbrella header "Pods-demo1_pod_import-umbrella.h"
+
+  export *
+  module * { export * }
+}
